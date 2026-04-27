@@ -5,6 +5,11 @@ require('dotenv').config();
 const authRoutes = require('./routes/authRoutes');
 const communityRoutes = require('./routes/communityRoutes');
 const projectRoutes = require('./routes/projectRoutes');
+const financeRoutes = require('./routes/financeRoutes');
+const documentRoutes = require('./routes/documentRoutes');
+const approvalRoutes = require('./routes/approvalRoutes');
+const feedbackRoutes = require('./routes/feedbackRoutes');
+const dashboardRoutes = require('./routes/dashboardRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -12,6 +17,8 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(cors());
 app.use(express.json()); // Agar bisa membaca body request berupa JSON
+
+app.use('/uploads', express.static('uploads'));
 
 // Route dasar untuk testing
 app.get('/', (req, res) => {
@@ -21,6 +28,11 @@ app.get('/', (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/communities', communityRoutes);
 app.use('/api', projectRoutes);
+app.use('/api', financeRoutes);
+app.use('/api', documentRoutes);
+app.use('/api', approvalRoutes);
+app.use('/api', feedbackRoutes);
+app.use('/api', dashboardRoutes);
 
 // Jalankan server
 app.listen(PORT, () => {
